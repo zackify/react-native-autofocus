@@ -16,4 +16,4 @@ export default () => (
 )
 ```
 
-Hit enter inside your first input, and the next field will be focused. The logic is all abtracted for you!
+Hit enter inside your first input, and the next field will be focused. The logic is all abstracted for you!
