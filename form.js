@@ -10,7 +10,7 @@ export default class Form extends React.Component {
   renderChildren(children) {
     return React.Children.map(children, (child, index) => {
       if (child.children)
-        return React.cloneElement(child, this.renderChildren(children));
+        return React.cloneElement(child, this.renderChildren(child.children));
       if (child.type.name !== 'TextInput') return child;
 
       return React.cloneElement(child, {

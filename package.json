@@ -1,6 +1,6 @@
 {
   "name": "react-native-autofocus",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Move to next input field on enter in a form",
   "main": "index.js",
   "scripts": {
