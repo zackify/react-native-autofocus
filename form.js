@@ -15,11 +15,12 @@ export default class Form extends React.Component {
           children: this.renderChildren(child.props.children, index)
         });
       if (child.type.name !== 'TextInput') return child;
-
+      
+      let realIndex = index + recursiveIndex
       return React.cloneElement(child, {
         onEnter: () =>
-          this.inputs[index + recursiveIndex + 1] ? this.inputs[index + recursiveIndex + 1].focus() : null,
-        inputRef: ref => (this.inputs[index] = ref),
+          this.inputs[realIndex + 1] ? this.inputs[realIndex + 1].focus() : null,
+        inputRef: ref => (this.inputs[realIndex] = ref),
       });
     });
   }
