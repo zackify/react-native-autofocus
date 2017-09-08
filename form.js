@@ -7,18 +7,18 @@ export default class Form extends React.Component {
     this.inputs = [];
   }
 
-  renderChildren(children) {
+  renderChildren(children, recursiveIndex = 0) {
     return React.Children.map(children, (child, index) => {
       if (child.props.children)
         return React.cloneElement(child, {
           ...child.props, 
-          children: this.renderChildren(child.props.children)
+          children: this.renderChildren(child.props.children, index)
         });
       if (child.type.name !== 'TextInput') return child;
 
       return React.cloneElement(child, {
         onEnter: () =>
-          this.inputs[index + 1] ? this.inputs[index + 1].focus() : null,
+          this.inputs[index + recursiveIndex + 1] ? this.inputs[index + recursiveIndex + 1].focus() : null,
         inputRef: ref => (this.inputs[index] = ref),
       });
     });
