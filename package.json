@@ -21,7 +21,8 @@
     "url": "https://github.com/zackify/react-native-autofocus/issues"
   },
   "homepage": "https://github.com/zackify/react-native-autofocus#readme",
-  "devDependencies": {
-    "prop-types": "^15.6.1"
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-native": "^0.54.0"
   }
 }
