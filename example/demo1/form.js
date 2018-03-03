@@ -10,13 +10,13 @@ export default class Form extends React.Component {
   checkIfInput = element => {
     const elemName = element.type.name || element.type.displayName;
     const inputElements = this.props.inputElements ||
-      [
-        {
-          names: ['TextInput'], // names: 'TextInput' or name: 'TextInput' is also okay
-          submitFunctionNames: ['onSubmitEditing'], // submitFunctionNames: 'onSubmitEditing' or submitFunctionName: 'onSubmitEditing' is also okay
-          focus: 'focus',
-        },
-      ];
+    [
+      {
+        names: ['TextInput'], // names: 'TextInput' or name: 'TextInput' is also okay
+        submitFunctionNames: ['onSubmitEditing'], // submitFunctionNames: 'onSubmitEditing' or submitFunctionName: 'onSubmitEditing' is also okay
+        focus: 'focus',
+      },
+    ];
     for (let input of inputElements) {
       let names = [];
       if (input.names) {
@@ -67,7 +67,7 @@ export default class Form extends React.Component {
   renderChildren(children, recursiveIndex = 0) {
     console.log('renderChildren', children.length);
     return React.Children.map(children, (child, index) => {
-      //return children.map((child, index) => {
+    //return children.map((child, index) => {
       if (child.props.children)
         return React.cloneElement(child, {
           ...child.props,
