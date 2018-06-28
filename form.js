@@ -9,6 +9,8 @@ export default class Form extends React.Component {
 
   renderChildren(children, recursiveIndex = 0) {
     return React.Children.map(children, (child, index) => {
+      if(child === null)
+        return;
       if (child.props.children)
         return React.cloneElement(child, {
           ...child.props, 
