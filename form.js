@@ -22,7 +22,12 @@ export default class Form extends React.Component {
       return React.cloneElement(child, {
         onEnter: () =>
           this.inputs[realIndex + 1] ? this.inputs[realIndex + 1].focus() : null,
-        inputRef: ref => (this.inputs[realIndex] = ref),
+        inputRef: ref => {
+          this.inputs[realIndex] = ref;
+          if(child.props.inputRef && child.props.inputRef == "function") {
+            child.props.inputRef(ref);
+          }
+        },
       });
     });
   }
