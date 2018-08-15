@@ -16,4 +16,17 @@ export default () => (
 )
 ```
 
+You can set your own input component:
+
+```js
+import { Form } from 'react-native-autofocus'
+
+export default () => (
+  <Form>
+    <TextInput component={MyTextInput} placeholder="test" />
+    <TextInput component={MyTextInput} placeholder="test 2" />
+  </Form>
+)
+```
+
 Hit enter inside your first input, and the next field will be focused. The logic is all abstracted for you!
