@@ -1,35 +1,54 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import TextInput from "./text-input";
+
 export default class Form extends React.Component {
   constructor() {
     super();
     this.inputs = [];
   }
 
-  renderChildren(children, recursiveIndex = 0) {
-    return React.Children.map(children, (child, index) => {
+  renderChildren(children, recursive=false) {
+    if(!recursive) this.count = 0;
+    let inputTypes = this.props.inputTypes || [ TextInput ];
+    let elements = React.Children.map(children, (child, index) => {
       if(!child)
         return;
-      if (child.props.children)
-        return React.cloneElement(child, {
-          ...child.props, 
-          children: this.renderChildren(child.props.children, index)
-        });
-      if (child.type.name !== 'TextInput') return child;
-      
-      let realIndex = index + recursiveIndex
+  
+      if (!inputTypes.some(input => input === child.type)) {
+        if (child.props && child.props.children) {
+          return React.cloneElement(child, {
+            ...child.props, 
+            children: this.renderChildren(child.props.children, true)
+          });
+        }  
+        return child;
+      }
+
+      const realIndex = this.count;
+      this.count++;
+
       return React.cloneElement(child, {
-        onEnter: () =>
-          this.inputs[realIndex + 1] ? this.inputs[realIndex + 1].focus() : null,
+        onSubmitEditing: () => {
+          if(this.inputs[realIndex + 1] && this.inputs[realIndex + 1].focus) {
+            this.inputs[realIndex + 1].focus();
+          }
+        },
         inputRef: ref => {
           this.inputs[realIndex] = ref;
-          if(child.props.inputRef && child.props.inputRef == "function") {
+          if(child.props.inputRef) {
             child.props.inputRef(ref);
           }
         },
       });
     });
+
+    if(children && !Array.isArray(children) && elements.length == 1) {
+      return elements[0];
+    }
+
+    return elements;
   }
 
   render() {

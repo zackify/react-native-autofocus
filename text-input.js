@@ -5,7 +5,7 @@ const TextInput = ({ onSubmitEditing, onEnter, inputRef, component=null, ...prop
   const InputComponent = component || Input;
   return (
     <InputComponent
-      ref={ref => inputRef(ref)}
+      ref={ref => inputRef && inputRef(ref)}
       onSubmitEditing={() => {
         if (onEnter) onEnter();
         if (onSubmitEditing) onSubmitEditing();
